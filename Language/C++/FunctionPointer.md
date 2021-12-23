@@ -59,7 +59,7 @@ int main() {
 ```
 ------------------------------------------------------------------------
    ### 함수 선언 후, 함수 포인터 배열에 저장한다면 index로 더 빠르게 해당 함수에 접근할 수 있다.
-- 예제 코드
+- 예제 코드(함수 포인터 미사용)
 ```c++
 #include <iostream>
 
@@ -89,4 +89,73 @@ int main() {
 - 예제 코드
 ```c++
 #include <iostream>
+#define UP		1
+#define DOWN	2
+
+using namespace std;
+
+void simple_sort(int* arr, int n, int cmp) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n - 1 - i; j++) {
+			if (cmp == UP) {
+				if (arr[j] > arr[j + 1])
+					arr[j] ^= arr[j + 1] ^= arr[j] ^= arr[j + 1];
+			}
+			else if (cmp == DOWN) {
+				if(arr[j]<arr[j+1])
+					arr[j] ^= arr[j + 1] ^= arr[j] ^= arr[j + 1];
+			}
+		}
+	}
+}
+
+void sort_print(int* arr, int n) {
+	for (int i = 0; i < n; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+
+int main() {
+	int arr[5] = { 10, 5, 41, 100, 2 };
+	simple_sort(arr, 5, DOWN);
+	sort_print(arr, 5);
+	simple_sort(arr, 5, UP);
+	sort_print(arr, 5);
+	return 0;
+}
 ```
+- 예제 코드(함수 포인터 사용)
+```c++
+#include <iostream>
+
+using namespace std;
+typedef bool(*Cmp)(int, int);
+bool Up(int x, int y) { return x > y; }
+bool Down(int x, int y) { return x < y; }
+
+void simple_sort(int* arr, int n, Cmp cmp) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n - 1 - i; j++) {
+			if (cmp(arr[j], arr[j + 1])) {
+				arr[j] ^= arr[j + 1] ^= arr[j] ^= arr[j + 1];
+			}
+		}
+	}
+}
+
+void sort_print(int* arr, int n) {
+	for (int i = 0; i < n; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+
+int main() {
+	int arr[5] = { 10, 5, 41, 100, 2 };
+	simple_sort(arr, 5, Down);
+	sort_print(arr, 5);
+	simple_sort(arr, 5, Up);
+	sort_print(arr, 5);
+	return 0;
+}
+```
+	함수 포인터를 사용하여 조건에 따라 달라지는 함수를 작성하는 것이 용이해진다.
