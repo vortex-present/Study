@@ -72,6 +72,7 @@ int main(){
 ```
 
   컴파일러가 타입을 정확히 알아낼 수 있는 경우 auto로 표현할 수 있다.
+  - 예제 코드(출처 : https://modoocode.com/222)
   ```c
 #include <iostream>
 #include <typeinfo>
@@ -87,13 +88,13 @@ class SomeClass {
 };
 
 int main() {
-  auto c = sum(1, 2);  // 함수 리턴 타입으로 부터 int 라고 추측 가능
-  auto num = 1.0 + 2.0;  // double 로 추측 가능!
+  auto c = sum(1, 2);  // sum의 반환형이 int이므로 추정 가능
+  auto num = 1.0 + 2.0;  // double 간의 연산이므로 추정 가능
 
   SomeClass some(10);
   auto some2 = some;
 
-  auto some3(10);  // SomeClass 객체를 만들까요?
+  auto some3(10);  //10은 int이기 때문에 컴파일러 입장에서는 int로 추정
 
   std::cout << "c 의 타입은? :: " << typeid(c).name() << std::endl;
   std::cout << "num 의 타입은? :: " << typeid(num).name() << std::endl;
