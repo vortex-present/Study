@@ -8,15 +8,12 @@
 - 예제 코드 
 <pre>
 <code>
-
-#include <stdio.h>
-
+#include <<stdio.h>>
 int main(){
   auto int num1 = 10; // int num1 = 10 과 같은 의미
   printf("%d\n", num1);
   return 0;
 }
-
 </code>
 </pre>
 
