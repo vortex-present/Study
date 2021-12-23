@@ -72,6 +72,35 @@ int main(){
 ```
 
   컴파일러가 타입을 정확히 알아낼 수 있는 경우 auto로 표현할 수 있다.
+  ```c
+#include <iostream>
+#include <typeinfo>
+
+int sum(int a, int b) { return a + b; }
+
+class SomeClass {
+  int data;
+
+ public:
+  SomeClass(int d) : data(d) {}
+  SomeClass(const SomeClass& s) : data(s.data) {}
+};
+
+int main() {
+  auto c = sum(1, 2);  // 함수 리턴 타입으로 부터 int 라고 추측 가능
+  auto num = 1.0 + 2.0;  // double 로 추측 가능!
+
+  SomeClass some(10);
+  auto some2 = some;
+
+  auto some3(10);  // SomeClass 객체를 만들까요?
+
+  std::cout << "c 의 타입은? :: " << typeid(c).name() << std::endl;
+  std::cout << "num 의 타입은? :: " << typeid(num).name() << std::endl;
+  std::cout << "some2 의 타입은? :: " << typeid(some2).name() << std::endl;
+  std::cout << "some3 의 타입은? :: " << typeid(some3).name() << std::endl;
+}
+  ```
 
   매개변수 불가, 구조체, 클래스 멤버변수 불가
   : 함수나 구조체, 클래스 등은 컴파일러가 애당초 필요한 메모리가 얼마나 되는지 미리 알고 할당해야 합니다. 따라서 auto를 쓰게 되면 적절한 공간 계산이 불가하기 때문에 이와 같이는 사용할 수 없습니다.
