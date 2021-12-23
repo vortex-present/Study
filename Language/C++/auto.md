@@ -6,8 +6,7 @@
   일반적으로 main 또는 함수 내부에서 선언한 모든 변수가 auto 변수입니다.
 
 - 예제 코드 
-<pre>
-<code>
+
 '''c
 #include <<stdio.h>>
 int main(){
@@ -16,8 +15,7 @@ int main(){
   return 0;
 }
 '''
-</code>
-</pre>
+
 
 
 
