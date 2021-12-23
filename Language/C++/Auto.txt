@@ -60,12 +60,21 @@ int main(){
   (math.*MathSum1)(5, 5);
   
   std::map<int, int> mapContainer;
-  // 템플릿 형식의 타입
-  std::map<int, int>::iterator it1 = mapContainer.begin();
+  // 템플릿 형식의 타입을 auto를 사용
+  auto it1 = mapContainer.begin();
 }
 
 컴파일러가 타입을 정확히 알아낼 수 있는 경우 auto로 표현할 수 있다.
 
 매개변수 불가, 구조체, 클래스 멤버변수 불가
 : 함수나 구조체, 클래스 등은 컴파일러가 애당초 필요한 메모리가 얼마나 되는지 미리 알고 할당해야 합니다. 따라서 auto를 쓰게 되면 적절한 공간 계산이 불가하기 때문에 이와 같이는 사용할 수 없습니다.
+
+- 예제 코드 -
+void add(auto a, auto b){}
+struct{
+  auto b;
+}
+class Person{
+  auto name;
+}
 ----------------------------------------------------------------------------------------------------
