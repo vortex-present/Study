@@ -8,6 +8,7 @@
 - 예제 코드 
 <pre>
 <code>
+
 #include <stdio.h>
 
 int main(){
@@ -15,6 +16,7 @@ int main(){
   printf("%d\n", num1);
   return 0;
 }
+
 </code>
 </pre>
 
