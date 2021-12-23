@@ -39,12 +39,13 @@ double mul(double a, double b) { return a * b; }
 double div(double a, double b) { return a / b; }
 
 int main() {
-	double (*calc)(double, double) = NULL;
+	double (*calc)(double, double) = NULL; // 반환 타입, 변수 이름, 매개변수 타입
 	char oper;
 	double a, b, ans;
 	cin >> oper >> a >> b;
 	switch (oper)
 	{
+	// 포인터에 원하는 함수를 대입
 	case '+': calc = add; break;
 	case '-': calc = sub; break;
 	case '*': calc = mul; break;
@@ -55,4 +56,37 @@ int main() {
 	cout << "사칙 연산의 결과는 " << ans << "입니다.";
 	return 0;
 }
+```
+------------------------------------------------------------------------
+   ### 함수 선언 후, 함수 포인터 배열에 저장한다면 index로 더 빠르게 해당 함수에 접근할 수 있다.
+- 예제 코드
+```c++
+#include <iostream>
+
+using namespace std;
+
+double add(double a, double b) { return a + b; }
+double sub(double a, double b) { return a - b; }
+double mul(double a, double b) { return a * b; }
+double div(double a, double b) { return a / b; }
+double (*calc[])(double, double) = {add, sub, mul, div};
+
+int main() {
+	int oper;
+	double a, b, ans;
+	cin >> oper >> a >> b;
+	if(oper < 0 || oper > 3){
+		cout << "0 : 덧셈, 1 : 뺄셈, 2 : 곱셈, 3 : 나눗셈";
+		return 0;
+	}
+	ans = calc[oper](a, b);
+	cout << "사칙 연산의 결과는 " << ans << "입니다.";
+	return 0;
+}
+```
+--------------------------------------------------------------
+	### 함수 포인터를 매개 변수로 사용하면 더 유연하게 코드를 작성할 수 있다.
+- 예제 코드
+```c++
+#include <iostream>
 ```
